@@ -98,6 +98,8 @@ hosts文件目录 : `C:\Windows\System32\drivers\etc\hosts`
 
 ​	HDFS地址 : master 端口 : 9000
 
+​	用户名 : root
+
 一些视图 ：
 
 ![](https://github.com/XingToMax/BigDataLearning/blob/master/images/4.png)
