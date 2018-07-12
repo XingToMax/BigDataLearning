@@ -76,9 +76,17 @@ hosts文件目录 : `C:\Windows\System32\drivers\etc\hosts`
 
 具体步骤如下 : 
 
-![图片1占位]()
++ 设置maven运行
 
-![图片2占位]()
+![](https://github.com/XingToMax/BigDataLearning/blob/master/images/1.png)
+
++ 选取maven
+
+  ​		![](https://github.com/XingToMax/BigDataLearning/blob/master/images/2.png)
+
++ 设置clean命令
+
+  ​		![](https://github.com/XingToMax/BigDataLearning/blob/master/images/3.png)
 
 应用修改后使用maven运行项目，完成clean命令后，将clean改为`assembly:assembly`，成功执行后，在`target`目录下生成了名为`HadoopIntellijPlugin-1.0.zip`的文件。在`File->Settings`中打开`Plugins`，选择`Install plugin from disk`，选择生成的zip文件即可安装。安装成功后，在菜单栏就会出现一个`Hadoop`项，可以进行文件系统的操作。·
 
@@ -92,9 +100,9 @@ hosts文件目录 : `C:\Windows\System32\drivers\etc\hosts`
 
 一些视图 ：
 
-![]()
+![](https://github.com/XingToMax/BigDataLearning/blob/master/images/4.png)
 
-![]()
+![](https://github.com/XingToMax/BigDataLearning/blob/master/images/5.png)
 
 ### Helloworld : WordCount
 
