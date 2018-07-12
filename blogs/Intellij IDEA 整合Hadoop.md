@@ -56,13 +56,13 @@ hosts文件目录 : `C:\Windows\System32\drivers\etc\hosts`
 
 具体需要的内容已经放到了`hadoop/bin/`目录下，下载后即可使用。
 
-将其中的`hadoop.dll`复制到``C:\Windows\System32`目录下，其余内容复制到之前下载的`hadoop`目录的`bin`目录下
+将其中的`hadoop.dll`复制到`C:\Windows\System32`目录下，其余内容复制到之前下载的`hadoop`目录的`bin`目录下
 
 ### HadoopIntellijPlugin
 
 ##### 获取插件
 
-在正式进行开发前，可以先安装一个连接hadoop集群并进行文件管理的插件，`eclipse`的`hadoop`插件相对成熟一些且比较容易获取，`IDEA`的话目前我只在`github`上找到了一款
+在正式进行开发前，可以先安装一个连接hadoop集群并进行文件管理的插件，`eclipse`的`hadoop`插件相对成熟一些且比较容易获取，`IDEA`的话目前我只在`github`上找到了一款，项目名称为`HadoopIntellijPlugin`
 
 [插件地址](https://github.com/fangyuzhong2016/HadoopIntellijPlugin)
 
@@ -108,7 +108,9 @@ hosts文件目录 : `C:\Windows\System32\drivers\etc\hosts`
 
 ### Helloworld : WordCount
 
-新建maven项目
+下面来看一下WordCount这个例子，首先新建maven项目
+
+填写pom.xml
 
 ##### pom.xml
 
@@ -162,7 +164,7 @@ hosts文件目录 : `C:\Windows\System32\drivers\etc\hosts`
     </dependencies>
 ```
 
-##### 新建java类`WordCount`
+##### 在src下新建java类`WordCount`
 
 ``` java
 import java.io.IOException;
@@ -218,13 +220,25 @@ public class WordCount {
         Configuration conf = new Configuration();
         Job job = new Job(conf, "word count");
         job.setJarByClass(WordCount.class);
+        // 设置map
         job.setMapperClass(TokenizerMapper.class);
+        // 设置combiner
         job.setCombinerClass(IntSumReducer.class);
+        // 设置reducer
         job.setReducerClass(IntSumReducer.class);
+        // 设置map输出的key
+        job.setMapOutputKeyClass(Text.class);
+        // 设置map输出的value
+        job.setMapOutputValueClass(IntWritable.class);
+        // 设置reduce输出的Key
         job.setOutputKeyClass(Text.class);
+        // 设置reduce输出的value
         job.setOutputValueClass(IntWritable.class);
+        // 设置单词资源文件的路径
         FileInputFormat.addInputPath(job, new Path("hdfs://master:9000/tomax/words.log"));
+        // 设置结果输出路径
         FileOutputFormat.setOutputPath(job, new Path("hdfs://master:9000/tomax/res.log"));
+        // 执行Job并验证结果
         System.exit(job.waitForCompletion(true) ? 0 : 1);
     }
 }
@@ -482,7 +496,7 @@ reduce 输出 <key,value> : <tomax,4>
 
 
 
-一个比较简单的sample，新手起步，如有不足，还望指出
+作为萌新，尝试了一个比较简单的sample，对于整个架构基本都不清楚，如有不足，还望指出
 
 
 
